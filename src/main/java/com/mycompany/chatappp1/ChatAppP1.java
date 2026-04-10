@@ -1,6 +1,15 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
+/*
+ * Author: Troy Joshua
+ * Date: 10 April 2026
+ * Program: ChatAppP1
+ * Description: Validates username, password, and phone number input.
+ */
+// Source: Oracle Java Documentation - Character Class
+// https://docs.oracle.com/javase/8/docs/api/java/lang/Character.html
+
 package com.mycompany.chatappp1;
 
 import java.util.Scanner;
