@@ -9,7 +9,6 @@
  */
 // Source: Oracle Java Documentation - Character Class
 // https://docs.oracle.com/javase/8/docs/api/java/lang/Character.html
-
 package com.mycompany.chatappp1;
 
 import java.util.Scanner;
@@ -20,70 +19,97 @@ public class ChatAppP1 {
 
         Scanner scanner = new Scanner(System.in);
 
-        // Username
-        System.out.print("Enter a username that contains an underscore and is no more than five characters long:\n");
-        String username = scanner.nextLine();
+        String username;
+        String password;
+        String phoneNumber;
 
-        if (isValidUsername(username)) {
-            System.out.println("Username successfully captured!");
-        } else {
-            System.out.println("Username is not correctly formatted; please ensure your username contains an underscore and is no more than five characters in length.");
+        // REGISTRATION PHASE
+
+        // Username loop
+        while (true) {
+            System.out.print("Enter a username (must contain '_' and be max 5 characters): ");
+            username = scanner.nextLine();
+
+            if (isValidUsername(username)) {
+                System.out.println("Username successfully captured!\n");
+                break;
+            } else {
+                System.out.println("Invalid username. Try again.\n");
+            }
         }
 
-        // Password
-        System.out.print("Enter a password that contains at least eight characters, an uppercase letter, a number and a special character:\n");
-        String password = scanner.nextLine();
+        // Password loop
+        while (true) {
+            System.out.print("Enter a password (8+ chars, uppercase, number, special char): ");
+            password = scanner.nextLine();
 
-        if (isValidPassword(password)) {
-            System.out.println("Password successfully captured!");
-        } else {
-            System.out.println("Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number and a special character!");
+            if (isValidPassword(password)) {
+                System.out.println("Password successfully captured!\n");
+                break;
+            } else {
+                System.out.println("Invalid password. Try again.\n");
+            }
         }
 
-        // Phone Number
-        System.out.print("Enter a phone number with international country code (e.g. +27123456789):\n");
-        String phoneNumber = scanner.nextLine();
+        // Phone number loop
+        while (true) {
+            System.out.print("Enter phone number (e.g. +271234567890): ");
+            phoneNumber = scanner.nextLine();
 
-        if (isValidPhoneNumber(phoneNumber)) {
-            System.out.println("Phone number successfully captured!");
-        } else {
-            System.out.println("Phone number is not correctly formatted; please ensure it contains an international country code and no more than 10 digits after it.");
+            if (isValidPhoneNumber(phoneNumber)) {
+                System.out.println("Phone number successfully captured!\n");
+                break;
+            } else {
+                System.out.println("Invalid phone number. Try again.\n");
+            }
+        }
+
+        System.out.println("=== Registration Complete ===\n");
+
+        // LOGIN PHASE
+
+        System.out.println("=== LOGIN ===");
+
+        while (true) {
+            System.out.print("Enter username: ");
+            String loginUsername = scanner.nextLine();
+
+            System.out.print("Enter password: ");
+            String loginPassword = scanner.nextLine();
+
+            if (loginUsername.equals(username) && loginPassword.equals(password)) {
+                System.out.println("\nLogin successful! Welcome " + username + " 🎉");
+                break;
+            } else {
+                System.out.println("Login failed. Incorrect username or password. Try again.\n");
+            }
         }
 
         scanner.close();
     }
 
-    // Username Validation
+    // VALIDATION METHODS
+
     public static boolean isValidUsername(String username) {
         return username.length() <= 5 && username.contains("_");
     }
 
-    // Password Validation
     public static boolean isValidPassword(String password) {
-        if (password.length() < 8) {
-            return false;
-        }
+        if (password.length() < 8) return false;
 
         boolean hasUppercase = false;
         boolean hasDigit = false;
         boolean hasSpecial = false;
 
         for (char c : password.toCharArray()) {
-            if (Character.isUpperCase(c)) {
-                hasUppercase = true;
-            }
-            if (Character.isDigit(c)) {
-                hasDigit = true;
-            }
-            if (!Character.isLetterOrDigit(c)) {
-                hasSpecial = true;
-            }
+            if (Character.isUpperCase(c)) hasUppercase = true;
+            if (Character.isDigit(c)) hasDigit = true;
+            if (!Character.isLetterOrDigit(c)) hasSpecial = true;
         }
 
         return hasUppercase && hasDigit && hasSpecial;
     }
 
-    // Phone Number Validation
     public static boolean isValidPhoneNumber(String phoneNumber) {
         return phoneNumber.matches("^\\+\\d{1,3}\\d{10}$");
     }
